@@ -14,7 +14,7 @@ if st.button("구간 다운로드"):
         st.warning("모든 입력란을 채워주세요.")
     else:
         try:
-            # Step 1: 전체 영상 다운로드
+            # 전체 영상 다운로드
             ydl_opts = {
                 'format': 'bestvideo+bestaudio/best',
                 'outtmpl': 'full_video.%(ext)s',
@@ -24,7 +24,7 @@ if st.button("구간 다운로드"):
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([video_url])
 
-            # Step 2: ffmpeg로 구간 자르기
+            # ffmpeg로 구간 자르기
             input_file = "full_video.mp4"
             output_file = "clip.mp4"
 
@@ -39,7 +39,7 @@ if st.button("구간 다운로드"):
 
             subprocess.run(command, check=True)
 
-            # Step 3: 다운로드 링크 제공
+            # 다운로드 버튼
             with open(output_file, "rb") as f:
                 st.success("✅ 구간 클립 생성 완료!")
                 st.download_button("📥 다운로드", f, file_name="clip.mp4")
